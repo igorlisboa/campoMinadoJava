@@ -33,18 +33,17 @@ Cada um ficou responsavel por uma parte do projeto, mas o time pode se ajudar e 
 - Manter o projeto atualizado em suas maquinas.
 
 
-Baixar e instalar git
+# Baixar e instalar git
 
 
 - pelas linhas de comando vá ate o workspace do eclipse
 - execute o comando: 
-	git clone https://github.com/igorlisboa/campoMinadoJava.git
-(vai baixar o projeto para seu workspace)
+	git clone https://github.com/igorlisboa/campoMinadoJava.git (vai baixar o projeto para seu workspace)
 
 - acesse a pasta pelas linhas de comando
 	cd CampoMinadoJava
 
--Vc vai esta na branch (master), criei outra para ser a base do projeto.
+- Vc vai esta na branch (master), criei outra para ser a base do projeto.
 
 - Antes de prosseguir vamos configurar seu git:
 	git config --global user.email "you@example.com"
@@ -62,17 +61,17 @@ Baixar e instalar git
 
 - envie sua branch para o repositorio
 	git push
-(ira aparecer um erro, dizendo que essa branch ainda nao exite no repositorio, e mostrando a linha de comando que vc tem que usar para fazer isso[ela começa com git push --set-upstream], copie a linha toda cole e execute [se estiver no cmder é so selecionar e clicar com o botao direito que ja vai colar na linha de comando, ai é so dar enter])
+	(ira aparecer um erro, dizendo que essa branch ainda nao exite no repositorio, e mostrando a linha de comando que vc tem que usar para fazer isso[ela começa com git push --set-upstream], copie a linha toda cole e execute [se estiver no cmder é so selecionar e clicar com o botao direito que ja vai colar na linha de comando, ai é so dar enter])
 
 - vai pedir seu username(usuario) e senha do github que vc acabou de criar
-coloque o username, de enter
-depois a senha(nao vai aparecer nada mesmo, digita e da enter que funciona assim mesmo)
+	coloque o username, de enter
+	depois a senha(nao vai aparecer nada mesmo, digita e da enter que funciona assim mesmo)
 
 - Pronto ja vai da pra trabalhar na sua branch
 
 
 
-#No dia a dia !Importante!
+# No dia a dia !Importante!
 
 - antes de começar a trabalhar vc deve entrar na branch CMPrincipar e baixar as ultimas atualizaçoes disponiveis
 	git checkout CMPrincipal
