@@ -13,11 +13,14 @@ public class Campo{
 		private int[][]	minas;
 		
 //Construtor, getters e setters
+		public Campo(){}
 		public Campo(int qtdLinhas, int qtdColunas, int dificuldade) {
 			super();
 			this.qtdLinhas = qtdLinhas;
 			this.qtdColunas = qtdColunas;
 			this.dificuldade = dificuldade;
+			montaMinas();
+			montarCampo();
 		}
 		
 		
@@ -97,12 +100,18 @@ public class Campo{
 		}
 		
 		public boolean unicaCoordenada(int[][] coordenadas,int i, int j){
+			int teste = 0;
 			for (int a = 0; a < coordenadas.length; a++) {
 				if((coordenadas[a][0] == i) && (coordenadas[a][1] == j)){
-					return false;
+					teste++;
 				}
 			}
-			return true;
+			if (teste == 1) {
+				return true;
+			}else{
+				return false;
+			}
+			
 		}
 		
 		
@@ -175,6 +184,14 @@ public class Campo{
 							if (conferindo == 1) campo[i][j]++;
 							
 						}
+					}
+				}
+			}
+			
+			for (int i = 0; i < campo.length; i++) {
+				for (int j = 0; j < campo[1].length; j++) {
+					if(minas[i][j] == 1){
+						campo[i][j] = 0;
 					}
 				}
 			}
