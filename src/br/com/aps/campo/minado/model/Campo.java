@@ -55,12 +55,13 @@ public class Campo{
 		
 //Metodos
 		
-		public int[][] montarCampo(){
+		public int[][] montaMinas(){
 			//usar metodo randomico para gerar matriz de 0s e 1s de acordo com a dificuldade
 			Random aleatorio = new Random();
 			int numBombas = numBombas();
 			int [][] coordenadas = new int[numBombas][2];
 			
+			//monta um array com as coordenadas onde serão colocados as bombas(1s) 
 			for (int i = 0; i < numBombas; i++) {
 				
 				coordenadas[i][0] = aleatorio.nextInt(qtdLinhas-1);
@@ -68,34 +69,45 @@ public class Campo{
 				
 				if(!unicaCoordenada(coordenadas, coordenadas[i][0],coordenadas[i][1])){
 					boolean sair = false;
-					while()
-					
-					coordenadas[i][0] = aleatorio.nextInt(qtdLinhas-1);
-					coordenadas[i][1] = aleatorio.nextInt(qtdColunas-1);
+					while(sair == false){
+						coordenadas[i][0] = aleatorio.nextInt(qtdLinhas-1);
+						coordenadas[i][1] = aleatorio.nextInt(qtdColunas-1);
+						
+						 sair = unicaCoordenada(coordenadas, coordenadas[i][0],coordenadas[i][1]);
+					}
 				}
 				
 			}
 			
 			
-			return getCampo();
+			//monta as minas
+			minas = new int[qtdLinhas][qtdColunas];
+			for (int i = 0; i < coordenadas.length; i++) {
+				int a = coordenadas[i][0];
+				int b = coordenadas[i][1];
+				
+				minas[a][b] = 1;
+				
+			}
+			
+			
+			
+			
+			return getMinas();
 		}
 		
 		public boolean unicaCoordenada(int[][] coordenadas,int i, int j){
 			for (int a = 0; a < coordenadas.length; a++) {
 				if((coordenadas[a][0] == i) && (coordenadas[a][1] == j)){
-					
-				}else{
 					return false;
 				}
 			}
-			
 			return true;
-			
 		}
 		
 		
 		public int numBombas(){
-			int numBombas;
+			int numBombas = 0;
 			int areaTtl = qtdColunas * qtdLinhas;
 			
 			if(dificuldade == 1){
@@ -106,157 +118,68 @@ public class Campo{
 				numBombas = (int) Math.round(areaTtl * 0.5);
 			}else if(dificuldade == 4){
 				numBombas = (int) Math.round(areaTtl * 0.8);
-			}else 
+			}
 			
 			return numBombas;
 		}
 		
 		
+		public int[][] montarCampo(){
+			campo = new int[qtdLinhas][qtdColunas];
 	
-		/*int [][] minas = {{0,1,0,1,1},
-						  {0,0,0,1,0},
-						  {0,0,1,1,1},
-						  {0,0,0,1,0},
-						  {1,0,0,0,0}};
-		int[][] campo = new int[5][5];
-		
-		
-		
-		
-		for (int i = 0; i < minas.length; i++) {
-			for (int j = 0; j < minas.length; j++) {
-				
-			}
-		}*/
-		
-		
-	 
-		
-		
-		Scanner teclado = new Scanner(System.in);
-		//int entrada[][] = new int[5][5];
-		int jogo[][] = new int[5][5];
-		
-		int[][] entrada = {{1,0,0,0,0},
-						   {0,0,0,0,0},
-						   {1,1,1,1,1},
-						   {0,0,0,0,1},
-						   {1,0,0,0,1}};
-		
-		
-		//System.out.println("Coloque os valores do campo minado [1-bomba / 0-vazio]:");
-		
-		/*for (int i = 0; i < 5; i++) {
-			for (int j = 0; j < 5; j++) {
-				//entrada[i][j] = teclado.nextInt();
-				String resp = JOptionPane.showInputDialog("Coloque os valores do campo minado [1-bomba / 0-vazio]:");
-				entrada[i][j] =  Integer.parseInt(resp);
-				
-			}
-		}*/
-		
-		for (int i = 0; i <5 ; i++) {
-			for (int j = 0; j < 5; j++) {
-				//entrada[i][j];
-				//int /*linhaconfere*/lc = i - 1;
-				//int /*colunaconfere*/cc = j - 1;
-				//for ( int lc = i-1 ; lc <= i+1; lc++) {
-				
-				
-				//conferindo a linha de cima
-				int lc = i-1;
-				int cc;
-				for ( cc = j-1 ; cc <=j+1; cc++) {
+			for (int i = 0; i <qtdLinhas ; i++) {
+				for (int j = 0; j <qtdColunas ; j++) {
+					//conferindo a linha de cima
+					int lc = i-1;
+					int cc;
+					for ( cc = j-1 ; cc <=j+1; cc++) {
+							if ((lc < 0)||(cc < 0)||(lc>=5)||(cc>=5)) {
+								
+							}else{
+								int conferindo = minas[lc][cc];
+								if (conferindo == 1) campo[i][j]++;
+								
+							}
+						}
+					
+					
+					//conferindo os valores da esquerda e da direita
+					//esquerda
+					lc = i;
+					 cc = j-1;
+					if ((lc < 0)||(cc < 0)||(lc>=5)||(cc>=5)) {
+						
+					}else{
+						int conferindo = minas[lc][cc];
+						if (conferindo == 1) campo[i][j]++;
+						
+					}
+					//direita
+					lc = i;
+					cc = j+1;
+					if ((lc < 0)||(cc < 0)||(lc>=5)||(cc>=5)) {
+						
+					}else{
+						int conferindo = minas[lc][cc];
+						if (conferindo == 1) campo[i][j]++;
+						
+					}
+					
+					//conferindo a linha de baixo
+					 lc = i+1;
+					for ( cc = j-1 ; cc <=j+1; cc++) {
 						if ((lc < 0)||(cc < 0)||(lc>=5)||(cc>=5)) {
 							
 						}else{
-							/*if(entrada[lc][cc] == entrada[lc][cc]){
-								
-							}else*/
-							int conferindo = entrada[lc][cc];
-							if (conferindo == 1) jogo[i][j]++;
+							int conferindo = minas[lc][cc];
+							if (conferindo == 1) campo[i][j]++;
 							
 						}
 					}
-				
-				
-				//conferindo os valores da esquerda e da direita
-				//esquerda
-				lc = i;
-				 cc = j-1;
-				if ((lc < 0)||(cc < 0)||(lc>=5)||(cc>=5)) {
-					
-				}else{
-					int conferindo = entrada[lc][cc];
-					if (conferindo == 1) jogo[i][j]++;
-					
 				}
-				//direita
-				lc = i;
-				 cc = j+1;
-				if ((lc < 0)||(cc < 0)||(lc>=5)||(cc>=5)) {
-					
-				}else{
-					int conferindo = entrada[lc][cc];
-					if (conferindo == 1) jogo[i][j]++;
-					
-				}
-				
-				//conferindo a linha de baixo
-				 lc = i+1;
-				for ( cc = j-1 ; cc <=j+1; cc++) {
-						if ((lc < 0)||(cc < 0)||(lc>=5)||(cc>=5)) {
-							
-						}else{
-							/*if(entrada[lc][cc] == entrada[lc][cc]){
-								
-							}else*/
-							int conferindo = entrada[lc][cc];
-							if (conferindo == 1) jogo[i][j]++;
-							
-						}
-					}
-				
-				
-				/*for ( int lc = i+1 ; lc < 1; lc++) {
-					for ( int cc = j-1 ; cc < 3; cc++) {
-						if (entrada[lc][cc] == 1) {
-							jogo[i][j]++;
-						}
-					}
-				}*/
-				
 			}
+			
+			return getCampo();
 		}
-		
-		
-		String jog = jogo[0].toString();
-		
-		
-		
-		/*JOptionPane.showMessageDialog(null, jog);o[0]+"\n"+jogo[1]+"\n"+jogo[2]+"\n"+jogo[3]+"\n"+jogo[4];*/
-		for (int i = 0; i < 5; i++) {
-			for (int j = 0; j < 5; j++) {
-				System.out.print(jogo[i][j]+"\t");
-				
-			}
-			System.out.println("\n");
-		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-
 
 }
